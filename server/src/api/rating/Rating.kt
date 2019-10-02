@@ -18,11 +18,11 @@ class Rating
 
 @KtorExperimentalLocationsAPI
 fun Route.ratings(db: RatingsRepository) {
+    get<Rating> {
+        val phrases = db.ratings()
+        call.respond(phrases)
+    }
     authenticate("jwt") {
-        get<Rating> {
-            val phrases = db.ratings()
-            call.respond(phrases)
-        }
         post<Rating> {
             val request = call.receive<RequestRating>()
             db.add(

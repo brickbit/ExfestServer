@@ -18,11 +18,11 @@ class FoodRestriction
 
 @KtorExperimentalLocationsAPI
 fun Route.foodRestrictions(db: FoodRestrictionsRepository) {
+    get<FoodRestriction> {
+        val phrases = db.foodRestrictions()
+        call.respond(phrases)
+    }
     authenticate("jwt") {
-        get<FoodRestriction> {
-            val phrases = db.foodRestrictions()
-            call.respond(phrases)
-        }
         post<FoodRestriction> {
             val request = call.receive<RequestFoodRestriction>()
             db.add(

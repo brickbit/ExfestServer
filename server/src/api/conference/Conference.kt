@@ -18,11 +18,11 @@ class Conference
 
 @KtorExperimentalLocationsAPI
 fun Route.conferences(db: ConferencesRepository) {
+    get<Conference> {
+        val phrases = db.conferences()
+        call.respond(phrases)
+    }
     authenticate("jwt") {
-        get<Conference> {
-            val phrases = db.conferences()
-            call.respond(phrases)
-        }
         post<Conference> {
             val request = call.receive<RequestConference>()
             db.add(

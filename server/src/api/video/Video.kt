@@ -18,11 +18,11 @@ class Video
 
 @KtorExperimentalLocationsAPI
 fun Route.videos(db: VideosRepository) {
+    get<Video> {
+        val videos = db.videos()
+        call.respond(videos)
+    }
     authenticate("jwt") {
-        get<Video> {
-            val phrases = db.videos()
-            call.respond(phrases)
-        }
         post<Video> {
             val request = call.receive<RequestVideo>()
             db.add(

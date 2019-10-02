@@ -18,11 +18,11 @@ class Topic
 
 @KtorExperimentalLocationsAPI
 fun Route.topics(db: TopicsRepository) {
+    get<Topic> {
+        val phrases = db.topics()
+        call.respond(phrases)
+    }
     authenticate("jwt") {
-        get<Topic> {
-            val phrases = db.topics()
-            call.respond(phrases)
-        }
         post<Topic> {
             val request = call.receive<RequestTopic>()
             db.add(

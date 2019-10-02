@@ -17,15 +17,15 @@ data class RatingDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
 fun Route.ratingsDetail(db: RatingsRepository) {
-    authenticate("jwt") {
-        get<RatingDetail> { item ->
-            when (db.ratings().find { it.id == item.id } ) {
-                null -> call.respond(HttpStatusCode.NotFound, Error("Rating with id ${item.id} not found"))
-                else -> {
-                    call.respond(db.rating(item.id)!!)
-                }
+    get<RatingDetail> { item ->
+        when (db.ratings().find { it.id == item.id } ) {
+            null -> call.respond(HttpStatusCode.NotFound, Error("Rating with id ${item.id} not found"))
+            else -> {
+                call.respond(db.rating(item.id)!!)
             }
         }
+    }
+    authenticate("jwt") {
         delete<RatingDetail> { item ->
             when (db.ratings().find { it.id == item.id }) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Rating with id ${item.id} not found"))

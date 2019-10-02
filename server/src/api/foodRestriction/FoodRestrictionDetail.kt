@@ -17,15 +17,15 @@ data class FoodRestrictionDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
 fun Route.foodRestrictionsDetail(db: FoodRestrictionsRepository) {
-    authenticate("jwt") {
-        get<FoodRestrictionDetail> { item ->
-            when (db.foodRestrictions().find { it.id == item.id } ) {
-                null -> call.respond(HttpStatusCode.NotFound, Error("FoodRestriction with id ${item.id} not found"))
-                else -> {
-                    call.respond(db.foodRestriction(item.id)!!)
-                }
+    get<FoodRestrictionDetail> { item ->
+        when (db.foodRestrictions().find { it.id == item.id } ) {
+            null -> call.respond(HttpStatusCode.NotFound, Error("FoodRestriction with id ${item.id} not found"))
+            else -> {
+                call.respond(db.foodRestriction(item.id)!!)
             }
         }
+    }
+    authenticate("jwt") {
         delete<FoodRestrictionDetail> { item ->
             when (db.foodRestrictions().find { it.id == item.id }) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("FoodRestriction with id ${item.id} not found"))

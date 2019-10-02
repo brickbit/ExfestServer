@@ -17,15 +17,15 @@ data class ConferenceDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
 fun Route.conferenceDetail(db: ConferencesRepository) {
-    authenticate("jwt") {
-        get<ConferenceDetail> { item ->
-            when (db.conferences().find { it.id == item.id }) {
-                null -> call.respond(HttpStatusCode.NotFound, Error("Conference with id ${item.id} not found"))
-                else -> {
-                    call.respond(db.conference(item.id)!!)
-                }
+    get<ConferenceDetail> { item ->
+        when (db.conferences().find { it.id == item.id }) {
+            null -> call.respond(HttpStatusCode.NotFound, Error("Conference with id ${item.id} not found"))
+            else -> {
+                call.respond(db.conference(item.id)!!)
             }
         }
+    }
+    authenticate("jwt") {
         delete<ConferenceDetail> { item ->
             when (db.conferences().find { it.id == item.id }) {
             null -> call.respond(HttpStatusCode.NotFound, Error("Conference with id ${item.id} not found"))

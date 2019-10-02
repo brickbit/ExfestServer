@@ -17,15 +17,15 @@ data class TopicDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
 fun Route.topicsDetail(db: TopicsRepository) {
-    authenticate("jwt") {
-        get<TopicDetail> { item ->
-            when (db.topics().find { it.id == item.id } ) {
-                null -> call.respond(HttpStatusCode.NotFound, Error("Topic with id ${item.id} not found"))
-                else -> {
-                    call.respond(db.topic(item.id)!!)
-                }
+    get<TopicDetail> { item ->
+        when (db.topics().find { it.id == item.id } ) {
+            null -> call.respond(HttpStatusCode.NotFound, Error("Topic with id ${item.id} not found"))
+            else -> {
+                call.respond(db.topic(item.id)!!)
             }
         }
+    }
+    authenticate("jwt") {
         delete<TopicDetail> { item ->
             when (db.topics().find { it.id == item.id }) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Topic with id ${item.id} not found"))
