@@ -9,7 +9,7 @@ data class Transport(val id: Int,
                      val cost: Float,
                      val shared: Boolean,
                      val dateRequest: String,
-                     val dateCheckIn: String,
+                     val dateArrive: String,
                      val dateExit: String): Serializable
 
 object Transports: Table() {
@@ -18,6 +18,6 @@ object Transports: Table() {
     val cost = float("cost")
     val shared = bool("shared")
     val dateRequest = varchar("date_request",32)
-    val dateCheckIn = varchar("date_check_in",32)
+    val dateArrive = varchar("date_arrive",32)
     val dateExit = varchar("date_exit",32)
 }

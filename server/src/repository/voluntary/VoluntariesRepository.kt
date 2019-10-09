@@ -25,7 +25,8 @@ interface VoluntariesRepository {
                     timesExpiredTicket: Int,
                     timesAbsent: Int,
                     gdg: String,
-                    cost: Float)
+                    cost: Float,
+                    email: String)
     suspend fun voluntary(id: Int): Voluntary?
     suspend fun voluntary(id: String): Voluntary?
     suspend fun voluntaries(): List<Voluntary>
@@ -52,7 +53,8 @@ interface VoluntariesRepository {
                     timesExpiredTicket: Int,
                     timesAbsent: Int,
                     gdg: String,
-                    cost: Float)
+                    cost: Float,
+                    email: String)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

@@ -1,7 +1,6 @@
 package api.voluntary
 
 import model.voluntary.RequestVoluntary
-import repository.voluntary.VoluntariesRepository
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.http.HttpStatusCode
@@ -9,6 +8,8 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import repository.publicVoluntary.PublicVoluntariesRepository
+import repository.voluntary.VoluntariesRepository
 
 const val VOLUNTARIES = "/voluntaries"
 @KtorExperimentalLocationsAPI
@@ -17,11 +18,11 @@ const val VOLUNTARIES = "/voluntaries"
 class Voluntary
 
 @KtorExperimentalLocationsAPI
-fun Route.voluntaries(db: VoluntariesRepository) {
+fun Route.voluntaries(db: VoluntariesRepository, dbPublic: PublicVoluntariesRepository) {
     authenticate("jwt") {
         get<Voluntary> {
-            val voluntaries = db.voluntaries()
-            call.respond(voluntaries)
+            val attendees = db.voluntaries()
+            call.respond(attendees)
         }
         post<Voluntary> {
             val request = call.receive<RequestVoluntary>()
@@ -48,12 +49,29 @@ fun Route.voluntaries(db: VoluntariesRepository) {
                 request.timesExpiredTicket,
                 request.timesAbsent,
                 request.gdg,
-                request.cost)
-            call.respond(HttpStatusCode.Created)
+                request.cost,
+                request.email)
+            when (db.voluntaries().find { it.email == request.email }) {
+                null -> call.respond(HttpStatusCode.NotFound,
+                    Error("Public attendee could not be created"))
+                else -> {
+                    val attendee = db.voluntaries().find { it.email == request.email }
+                    dbPublic.add(
+                        attendee!!.id,
+                        request.name,
+                        request.surname,
+                        request.image,
+                        request.company,
+                        request.gdg,
+                        request.email)
+                    call.respond(HttpStatusCode.Created)
+                }
+            }
         }
         delete<Voluntary> {
             db.clear()
-            call.respond(HttpStatusCode.OK, "Voluntary deleted")
+            dbPublic.clear()
+            call.respond(HttpStatusCode.OK, "Attendee deleted")
         }
     }
 }

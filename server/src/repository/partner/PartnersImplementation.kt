@@ -14,7 +14,8 @@ class PartnersImplementation : PartnersRepository {
             income = row[Partners.income],
             service = row[Partners.service],
             image = row[Partners.image],
-            category = row[Partners.category]
+            category = row[Partners.category],
+            email = row[Partners.email]
         )
 
     override suspend fun add(
@@ -22,7 +23,8 @@ class PartnersImplementation : PartnersRepository {
         income: Float,
         service: Int,
         image: String,
-        category: String
+        category: String,
+        email: String
     ) {
         transaction {
             Partners.insert {
@@ -31,6 +33,7 @@ class PartnersImplementation : PartnersRepository {
                 it [this.service] = service
                 it [this.image] = image
                 it [this.category] = category
+                it [this.email] = email
             }
         }
     }
@@ -55,7 +58,8 @@ class PartnersImplementation : PartnersRepository {
         income: Float,
         service: Int,
         image: String,
-        category: String
+        category: String,
+        email: String
     ) {
         transaction {
             Partners.update {
@@ -64,6 +68,7 @@ class PartnersImplementation : PartnersRepository {
                 it [this.service] = service
                 it [this.image] = image
                 it [this.category] = category
+                it [this.email] = email
             }
         }
     }
@@ -82,6 +87,9 @@ class PartnersImplementation : PartnersRepository {
     }
 
     override suspend fun clear() {
-        partners().map { remove(it.id) }
+        dbQuery {
+            Partners.deleteAll()
+            Partners
+        }
     }
 }

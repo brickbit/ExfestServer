@@ -23,6 +23,11 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import model.publicAttendee.PublicAttendees
+import model.publicOrganizer.PublicOrganizers
+import model.publicPartner.PublicPartners
+import model.publicSpeaker.PublicSpeakers
+import model.publicVoluntary.PublicVoluntaries
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -60,6 +65,12 @@ object DatabaseFactory {
             SchemaUtils.create(Organizers)
             SchemaUtils.create(Bills)
             SchemaUtils.create(Topics)
+
+            SchemaUtils.create(PublicAttendees)
+            SchemaUtils.create(PublicOrganizers)
+            SchemaUtils.create(PublicPartners)
+            SchemaUtils.create(PublicSpeakers)
+            SchemaUtils.create(PublicVoluntaries)
         }
     }
     suspend fun <T> dbQuery(

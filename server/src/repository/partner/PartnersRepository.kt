@@ -7,7 +7,8 @@ interface PartnersRepository {
                     income: Float,
                     service: Int,
                     image: String,
-                    category: String)
+                    category: String,
+                    email: String)
     suspend fun partner(id: Int): Partner?
     suspend fun partner(id: String): Partner?
     suspend fun partners(): List<Partner>
@@ -16,7 +17,8 @@ interface PartnersRepository {
                     income: Float,
                     service: Int,
                     image: String,
-                    category: String)
+                    category: String,
+                    email: String)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

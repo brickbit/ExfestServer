@@ -45,7 +45,7 @@ fun Route.transportsDetail(db: TransportsRepository) {
                         request.cost,
                         request.shared,
                         request.dateRequest,
-                        request.dateCheckin,
+                        request.dateArrive,
                         request.dateExit
                     )
                     call.respond(HttpStatusCode.Created)

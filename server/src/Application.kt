@@ -30,6 +30,16 @@ import api.rating.ratingsDetail
 import api.service.services
 import api.service.servicesDetail
 import api.auth.signIn
+import api.publicAttendee.publicAttendeeDetail
+import api.publicAttendee.publicAttendees
+import api.publicOrganizer.publicOrganizerDetail
+import api.publicOrganizer.publicOrganizers
+import api.publicPartner.publicPartnerDetail
+import api.publicPartner.publicPartners
+import api.publicSpeaker.publicSpeakerDetail
+import api.publicSpeaker.publicSpeakers
+import api.publicVoluntary.publicVoluntary
+import api.publicVoluntary.publicVoluntaryDetail
 import api.speaker.speakerDetail
 import api.speaker.speakers
 import api.topic.topics
@@ -72,6 +82,11 @@ import io.ktor.locations.Locations
 import io.ktor.response.*
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
+import repository.publicAttendee.PublicAttendeesImplementation
+import repository.publicOrganizer.PublicOrganizersImplementation
+import repository.publicPartner.PublicPartnersImplementation
+import repository.publicSpeaker.PublicSpeakersImplementation
+import repository.publicVoluntary.PublicVoluntariesImplementation
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 
@@ -114,6 +129,11 @@ fun Application.module() {
     val dbOrganizers = OrganizersImplementation()
     val dbBills = BillsImplementation()
     val dbTopics = TopicsImplementation()
+    val dbPublicAttendees = PublicAttendeesImplementation()
+    val dbPublicOrganizers = PublicOrganizersImplementation()
+    val dbPublicPartners = PublicPartnersImplementation()
+    val dbPublicSpeakers = PublicSpeakersImplementation()
+    val dbPublicVoluntaries = PublicVoluntariesImplementation()
 
     val jwtService = JWTService()
     install(Authentication) {
@@ -140,14 +160,14 @@ fun Application.module() {
         hotelsDetail(dbHotels)
         places(dbPlaces)
         placeDetail(dbPlaces)
-        speakers(dbSpeakers)
-        speakerDetail(dbSpeakers)
+        speakers(dbSpeakers, dbPublicSpeakers)
+        speakerDetail(dbSpeakers, dbPublicSpeakers)
         transports(dbTransports)
         transportsDetail(dbTransports)
-        attendees(dbAttendees)
-        attendeesDetail(dbAttendees)
-        voluntaries(dbVoluntaries)
-        voluntariesDetail(dbVoluntaries)
+        attendees(dbAttendees, dbPublicAttendees)
+        attendeesDetail(dbAttendees, dbPublicAttendees)
+        voluntaries(dbVoluntaries, dbPublicVoluntaries)
+        voluntariesDetail(dbVoluntaries, dbPublicVoluntaries)
         agendas(dbAgendas)
         agendasDetail(dbAgendas)
         ratings(dbRatings)
@@ -156,8 +176,8 @@ fun Application.module() {
         videosDetail(dbVideos)
         foodRestrictions(dbFoodRestrictions)
         foodRestrictionsDetail(dbFoodRestrictions)
-        partners(dbPartners)
-        partnersDetail(dbPartners)
+        partners(dbPartners, dbPublicPartners)
+        partnersDetail(dbPartners, dbPublicPartners)
         merchandisings(dbMerchandisings)
         merchandisingsDetail(dbMerchandisings)
         presents(dbPresents)
@@ -166,7 +186,7 @@ fun Application.module() {
         servicesDetail(dbServices)
         caterings(dbCaterings)
         cateringsDetail(dbCaterings)
-        organizers(dbOrganizers)
+        organizers(dbOrganizers,dbPublicOrganizers)
         organizersDetail(dbOrganizers)
         bills(dbBills)
         billsDetail(dbBills)
@@ -175,6 +195,17 @@ fun Application.module() {
 
         signIn(dbOrganizers)
         login(dbOrganizers,jwtService)
+
+        publicAttendees(dbPublicAttendees)
+        publicAttendeeDetail(dbPublicAttendees)
+        publicOrganizers(dbPublicOrganizers)
+        publicOrganizerDetail(dbPublicOrganizers)
+        publicPartners(dbPublicPartners)
+        publicPartnerDetail(dbPublicPartners)
+        publicSpeakers(dbPublicSpeakers)
+        publicSpeakerDetail(dbPublicSpeakers)
+        publicVoluntary(dbPublicVoluntaries)
+        publicVoluntaryDetail(dbPublicVoluntaries)
     }
 }
 

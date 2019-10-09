@@ -25,4 +25,5 @@ data class RequestVoluntary (
                      val timesAbsent: Int,
                      val gdg: String,
                      val idHotel: Int,
-                     val cost: Float)
+                     val cost: Float,
+                     val email: String)

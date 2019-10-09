@@ -13,12 +13,20 @@ class OrganizersImplementation : OrganizersRepository {
             name = row[Organizers.name],
             surname = row[Organizers.surname],
             email = row[Organizers.email],
-            password = row[Organizers.password]
+            password = row[Organizers.password],
+            moreInfo = row[Organizers.moreInfo],
+            image = row[Organizers.image],
+            company = row[Organizers.company],
+            gdg = row[Organizers.gdg]
         )
     override suspend fun add(name: String,
                              surname: String,
                              email: String,
-                             password: String
+                             password: String,
+                             moreInfo: String,
+                             image: String,
+                             company: String,
+                             gdg: String
     ) {
         transaction {
             Organizers.insert {
@@ -26,6 +34,10 @@ class OrganizersImplementation : OrganizersRepository {
                 it [this.surname] = surname
                 it [this.email] = email
                 it [this.password] = password
+                it [this.moreInfo] = moreInfo
+                it [this.image] = image
+                it [this.company] = company
+                it [this.gdg] = password
             }
         }
     }
@@ -80,18 +92,25 @@ class OrganizersImplementation : OrganizersRepository {
         Organizers.selectAll().map { toOrganizer(it) }
     }
 
-    override suspend fun update(
-                        name: String,
-                        surname: String,
-                        email: String,
-                        password: String
+    override suspend fun update(name: String,
+                                surname: String,
+                                email: String,
+                                password: String,
+                                moreInfo: String,
+                                image: String,
+                                company: String,
+                                gdg: String
     ) {
         transaction {
-            Organizers.update {
+            Organizers.insert {
                 it [this.name] = name
                 it [this.surname] = surname
                 it [this.email] = email
                 it [this.password] = password
+                it [this.moreInfo] = moreInfo
+                it [this.image] = image
+                it [this.company] = company
+                it [this.gdg] = password
             }
         }
     }

@@ -24,7 +24,8 @@ interface AttendeesRepository {
                     dateGrantTicket: String,
                     datePayedTicket: String,
                     timesExpiredTicket: Int,
-                    timesAbsent: Int)
+                    timesAbsent: Int,
+                    email: String)
     suspend fun attendee(id: Int): Attendee?
     suspend fun attendee(id: String): Attendee?
     suspend fun attendees(): List<Attendee>
@@ -50,7 +51,8 @@ interface AttendeesRepository {
                     dateGrantTicket: String,
                     datePayedTicket: String,
                     timesExpiredTicket: Int,
-                    timesAbsent: Int)
+                    timesAbsent: Int,
+                    email: String)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

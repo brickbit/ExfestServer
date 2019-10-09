@@ -30,7 +30,8 @@ data class Voluntary(
     val timesExpiredTicket: Int,
     val timesAbsent: Int,
     val gdg: String,
-    val cost: Float): Serializable
+    val cost: Float,
+    val email: String): Serializable
 
 object Voluntaries: Table() {
     val id = integer("id").primaryKey().autoIncrement()
@@ -57,4 +58,5 @@ object Voluntaries: Table() {
     val timesAbsent = integer("times_absent")
     val gdg = varchar("gdg", 128)
     val cost = float("cost")
+    val email = varchar("email", 64)
 }

@@ -2,7 +2,6 @@ package api.auth
 
 import hash
 import model.organizer.RequestOrganizer
-import repository.organizer.OrganizersRepository
 import io.ktor.application.call
 import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
@@ -12,6 +11,7 @@ import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
 import io.ktor.util.KtorExperimentalAPI
+import repository.organizer.OrganizersRepository
 
 const val SIGNIN = "/signin"
 
@@ -22,7 +22,11 @@ data class SignIn(
     val userId: String = "",
     val name: String = "",
     val email: String = "",
-    val password: String = "")
+    val password: String = "",
+    val moreInfo: String = "",
+    val image: String = "",
+    val company: String = "",
+    val gdg: String = "")
 
 @KtorExperimentalLocationsAPI
 @KtorExperimentalAPI
@@ -33,7 +37,11 @@ fun Route.signIn(db: OrganizersRepository) {
             request.name,
             request.surname,
             request.email,
-            hash(request.password)
+            hash(request.password),
+            request.moreInfo,
+            request.image,
+            request.company,
+            request.gdg
         )
 
         call.respond(HttpStatusCode.Created)

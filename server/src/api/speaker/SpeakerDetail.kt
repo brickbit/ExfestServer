@@ -9,6 +9,7 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import repository.publicSpeaker.PublicSpeakersRepository
 
 @KtorExperimentalLocationsAPI
 @Location("$SPEAKERS/{id}")
@@ -16,7 +17,7 @@ import io.ktor.routing.Route
 data class SpeakerDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
-fun Route.speakerDetail(db: SpeakersRepository) {
+fun Route.speakerDetail(db: SpeakersRepository, dbPublic: PublicSpeakersRepository) {
     authenticate("jwt") {
         get<SpeakerDetail> { item ->
             when (db.speakers().find { it.id == item.id } ) {
@@ -30,6 +31,7 @@ fun Route.speakerDetail(db: SpeakersRepository) {
             when (db.speakers().find { it.id == item.id }) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Speaker with id ${item.id} not found"))
                 else -> {
+                    dbPublic.remove(item.id)
                     db.remove(item.id)
                     call.respond(HttpStatusCode.OK, "Speaker $item.id deleted")
                 }
@@ -58,9 +60,28 @@ fun Route.speakerDetail(db: SpeakersRepository) {
                         request.image,
                         request.company,
                         request.rating,
-                        request.date
+                        request.date,
+                        request.email
                     )
-                    call.respond(HttpStatusCode.Created)
+                    when (dbPublic.publicSpeakers().find { it.id == item.id }) {
+                        null -> call.respond(
+                            HttpStatusCode.NotFound,
+                            Error("Public Speaker with id ${item.id} not found")
+                        )
+                        else -> {
+                            val speaker = dbPublic.publicSpeakers().find { it.id == item.id }
+                            dbPublic.update(
+                                speaker!!.id,
+                                request.name,
+                                request.surname,
+                                request.moreInfo,
+                                request.image,
+                                request.company,
+                                request.email
+                            )
+                            call.respond(HttpStatusCode.Created)
+                        }
+                    }
                 }
             }
         }

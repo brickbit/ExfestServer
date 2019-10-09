@@ -32,7 +32,8 @@ class VoluntariesImplementation : VoluntariesRepository {
             timesExpiredTicket = row[Voluntaries.timesExpiredTicket],
             timesAbsent = row[Voluntaries.timesAbsent],
             gdg = row[Voluntaries.gdg],
-            cost = row[Voluntaries.cost]
+            cost = row[Voluntaries.cost],
+            email = row[Voluntaries.email]
         )
 
     override suspend fun add(
@@ -58,7 +59,8 @@ class VoluntariesImplementation : VoluntariesRepository {
         timesExpiredTicket: Int,
         timesAbsent: Int,
         gdg: String,
-        cost: Float
+        cost: Float,
+        email: String
     ) {
         transaction {
             Voluntaries.insert {
@@ -85,6 +87,7 @@ class VoluntariesImplementation : VoluntariesRepository {
                 it [this.timesAbsent] = timesAbsent
                 it [this.gdg] = gdg
                 it [this.cost] = cost
+                it [this.email] = email
             }
         }
     }
@@ -126,7 +129,8 @@ class VoluntariesImplementation : VoluntariesRepository {
         timesExpiredTicket: Int,
         timesAbsent: Int,
         gdg: String,
-        cost: Float
+        cost: Float,
+        email: String
     ) {
         transaction {
             Voluntaries.update {
@@ -153,6 +157,7 @@ class VoluntariesImplementation : VoluntariesRepository {
                 it [this.timesAbsent] = timesAbsent
                 it [this.gdg] = gdg
                 it [this.cost] = cost
+                it [this.email] = email
             }
         }
     }

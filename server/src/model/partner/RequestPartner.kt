@@ -5,4 +5,5 @@ data class RequestPartner(
                    val income: Float,
                    val service: Int,
                    val image: String,
-                   val category: String)
+                   val category: String,
+                   val email: String)

@@ -27,7 +27,8 @@ data class Speaker(
     val image: String,
     val company: String,
     val rating: Int?,
-    val date: String): Serializable
+    val date: String,
+    val email: String): Serializable
 
 object Speakers: Table() {
     val id = integer("id").primaryKey().autoIncrement()
@@ -49,4 +50,5 @@ object Speakers: Table() {
     val company = varchar("company",255)
     val rating = reference("rating", Ratings.id).nullable()
     val date = varchar("date", 255)
+    val email = varchar("email", 64)
 }

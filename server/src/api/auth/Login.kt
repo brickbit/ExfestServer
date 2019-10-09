@@ -3,7 +3,6 @@ package api.auth
 import JWTService
 import hash
 import model.organizer.RequestOrganizer
-import repository.organizer.OrganizersRepository
 import io.ktor.application.call
 import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Location
@@ -12,6 +11,7 @@ import io.ktor.request.receive
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.util.KtorExperimentalAPI
+import repository.organizer.OrganizersRepository
 
 const val LOGIN_ENDPOINT = "/login"
 @KtorExperimentalLocationsAPI

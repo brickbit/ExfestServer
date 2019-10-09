@@ -18,4 +18,5 @@ data class RequestSpeaker(
     val image: String,
     val company: String,
     val rating: Int,
-    val date: String)
+    val date: String,
+    val email: String)

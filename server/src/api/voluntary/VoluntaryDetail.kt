@@ -1,7 +1,6 @@
 package api.voluntary
 
 import model.voluntary.RequestVoluntary
-import repository.voluntary.VoluntariesRepository
 import io.ktor.application.call
 import io.ktor.auth.authenticate
 import io.ktor.http.HttpStatusCode
@@ -9,6 +8,8 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import repository.publicVoluntary.PublicVoluntariesRepository
+import repository.voluntary.VoluntariesRepository
 
 @KtorExperimentalLocationsAPI
 @Location("$VOLUNTARIES/{id}")
@@ -16,7 +17,7 @@ import io.ktor.routing.Route
 data class VoluntaryDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
-fun Route.voluntariesDetail(db: VoluntariesRepository) {
+fun Route.voluntariesDetail(db: VoluntariesRepository, dbPublic: PublicVoluntariesRepository) {
     authenticate("jwt") {
         get<VoluntaryDetail> { item ->
             when (db.voluntaries().find { it.id == item.id } ) {
@@ -30,6 +31,7 @@ fun Route.voluntariesDetail(db: VoluntariesRepository) {
             when (db.voluntaries().find { it.id == item.id }) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Voluntary with id ${item.id} not found"))
                 else -> {
+                    dbPublic.remove(item.id)
                     db.remove(item.id)
                     call.respond(HttpStatusCode.OK, "Voluntary $item.id deleted")
                 }
@@ -63,9 +65,28 @@ fun Route.voluntariesDetail(db: VoluntariesRepository) {
                         request.timesExpiredTicket,
                         request.timesAbsent,
                         request.gdg,
-                        request.cost
+                        request.cost,
+                        request.email
                     )
-                    call.respond(HttpStatusCode.Created)
+                    when(dbPublic.publicVoluntaries().find { it.id == item.id }) {
+                        null -> call.respond(
+                            HttpStatusCode.NotFound,
+                            Error("Public voluntary with id ${item.id} not found")
+                        )
+                        else -> {
+                            val voluntary = dbPublic.publicVoluntaries().find { it.id == item.id }
+                            dbPublic.update(
+                                voluntary!!.id,
+                                request.name,
+                                request.surname,
+                                request.image,
+                                request.company,
+                                request.gdg,
+                                request.email
+                            )
+                            call.respond(HttpStatusCode.Created)
+                        }
+                    }
                 }
             }
         }

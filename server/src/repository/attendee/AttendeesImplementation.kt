@@ -31,8 +31,8 @@ class AttendeesImplementation : AttendeesRepository {
             dateGrantTicket = row[Attendees.dateGrantTicket],
             datePayedTicket = row[Attendees.datePayedTicket],
             timesExpiredTicket = row[Attendees.timesExpiredTicket],
-            timesAbsent = row[Attendees.timesAbsent]
-
+            timesAbsent = row[Attendees.timesAbsent],
+            email = row[Attendees.email]
         )
     override suspend fun add(
         name: String,
@@ -56,7 +56,8 @@ class AttendeesImplementation : AttendeesRepository {
         dateGrantTicket: String,
         datePayedTicket: String,
         timesExpiredTicket: Int,
-        timesAbsent: Int
+        timesAbsent: Int,
+        email: String
     ) {
         transaction {
             Attendees.insert {
@@ -82,7 +83,7 @@ class AttendeesImplementation : AttendeesRepository {
                 it [this.datePayedTicket] = datePayedTicket
                 it [this.timesExpiredTicket] = timesExpiredTicket
                 it [this.timesAbsent] = timesAbsent
-
+                it [this.email] = email
             }
         }
     }
@@ -123,7 +124,8 @@ class AttendeesImplementation : AttendeesRepository {
         dateGrantTicket: String,
         datePayedTicket: String,
         timesExpiredTicket: Int,
-        timesAbsent: Int
+        timesAbsent: Int,
+        email: String
     ) {
         transaction {
             Attendees.update {
@@ -149,7 +151,7 @@ class AttendeesImplementation : AttendeesRepository {
                 it [this.datePayedTicket] = datePayedTicket
                 it [this.timesExpiredTicket] = timesExpiredTicket
                 it [this.timesAbsent] = timesAbsent
-
+                it [this.email] = email
             }
         }
     }

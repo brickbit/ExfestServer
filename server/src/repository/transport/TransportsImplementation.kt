@@ -14,15 +14,15 @@ class TransportsImplementation : TransportsRepository {
             cost = row[Transports.cost],
             shared = row[Transports.shared],
             dateRequest = row[Transports.dateRequest],
-            dateCheckIn = row[Transports.dateCheckIn],
-            dateExit = row[Transports.dateExit]
+            dateExit = row[Transports.dateExit],
+            dateArrive = row[Transports.dateArrive]
         )
     override suspend fun add(
         kind: String,
         cost: Float,
         shared: Boolean,
         dateRequest: String,
-        dateCheckin: String,
+        dateArrive: String,
         dateExit: String
     ) {
         transaction {
@@ -31,7 +31,7 @@ class TransportsImplementation : TransportsRepository {
                 it [this.cost] = cost
                 it [this.shared] = shared
                 it [this.dateRequest] = dateRequest
-                it [this.dateCheckIn] =  dateCheckin
+                it [this.dateArrive] = dateArrive
                 it [this.dateExit] = dateExit
             }
         }
@@ -56,7 +56,7 @@ class TransportsImplementation : TransportsRepository {
         cost: Float,
         shared: Boolean,
         dateRequest: String,
-        dateCheckin: String,
+        dateArrive: String,
         dateExit: String
     ) {
         transaction {
@@ -65,7 +65,7 @@ class TransportsImplementation : TransportsRepository {
                 it [this.cost] = cost
                 it [this.shared] = shared
                 it [this.dateRequest] = dateRequest
-                it [this.dateCheckIn] =  dateCheckin
+                it [this.dateArrive] = dateArrive
                 it [this.dateExit] = dateExit
             }
         }

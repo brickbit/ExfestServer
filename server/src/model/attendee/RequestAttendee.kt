@@ -22,4 +22,5 @@ data class RequestAttendee(
     val dateGrantTicket: String,
     val datePayedTicket: String,
     val timesExpiredTicket: Int,
-    val timesAbsent: Int)
+    val timesAbsent: Int,
+    val email: String)

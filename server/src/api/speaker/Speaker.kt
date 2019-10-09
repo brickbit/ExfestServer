@@ -9,6 +9,7 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import repository.publicSpeaker.PublicSpeakersRepository
 
 const val SPEAKERS = "/speakers"
 @KtorExperimentalLocationsAPI
@@ -17,11 +18,11 @@ const val SPEAKERS = "/speakers"
 class Speaker
 
 @KtorExperimentalLocationsAPI
-fun Route.speakers(db: SpeakersRepository) {
+fun Route.speakers(db: SpeakersRepository, dbPublic: PublicSpeakersRepository) {
     authenticate("jwt") {
         get<Speaker> {
-            val phrases = db.speakers()
-            call.respond(phrases)
+            val speakers = db.speakers()
+            call.respond(speakers)
         }
         post<Speaker> {
             val request = call.receive<RequestSpeaker>()
@@ -43,12 +44,29 @@ fun Route.speakers(db: SpeakersRepository) {
                 request.image,
                 request.company,
                 request.rating,
-                request.date)
-            call.respond(HttpStatusCode.Created)
+                request.date,
+                request.email)
+            when (db.speakers().find { it.email == request.email }) {
+                null -> call.respond(HttpStatusCode.NotFound,
+                    Error("Public attendee could not be created"))
+                else -> {
+                    val speaker = db.speakers().find { it.email == request.email }
+                    dbPublic.add(
+                        speaker!!.id,
+                        request.name,
+                        request.surname,
+                        request.moreInfo,
+                        request.image,
+                        request.company,
+                        request.email)
+                    call.respond(HttpStatusCode.Created)
+                }
+            }
         }
         delete<Speaker> {
             db.clear()
-            call.respond(HttpStatusCode.OK, "Speaker deleted")
+            dbPublic.clear()
+            call.respond(HttpStatusCode.OK, "Attendee deleted")
         }
     }
 }

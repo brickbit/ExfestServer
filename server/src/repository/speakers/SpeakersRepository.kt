@@ -20,7 +20,8 @@ interface SpeakersRepository {
                     image: String,
                     company: String,
                     rating: Int,
-                    date: String)
+                    date: String,
+                    email: String)
     suspend fun speaker(id: Int): Speaker?
     suspend fun speaker(id: String): Speaker?
     suspend fun speakers(): List<Speaker>
@@ -42,7 +43,8 @@ interface SpeakersRepository {
                     image: String,
                     company: String,
                     rating: Int,
-                    date: String)
+                    date: String,
+                    email: String)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

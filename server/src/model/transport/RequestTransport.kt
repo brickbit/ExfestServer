@@ -5,5 +5,5 @@ data class RequestTransport(
                      val cost: Float,
                      val shared: Boolean,
                      val dateRequest: String,
-                     val dateCheckin: String,
+                     val dateArrive: String,
                      val dateExit: String)

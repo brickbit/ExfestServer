@@ -27,8 +27,8 @@ class SpeakersImplementation : SpeakersRepository {
             image =  row[Speakers.image],
             company =  row[Speakers.company],
             rating =  row[Speakers.rating],
-            date =  row[Speakers.date]
-
+            date =  row[Speakers.date],
+            email = row[Speakers.email]
         )
     override suspend fun add(name: String,
                              surname: String,
@@ -47,7 +47,8 @@ class SpeakersImplementation : SpeakersRepository {
                              image: String,
                              company: String,
                              rating: Int,
-                             date: String
+                             date: String,
+                             email: String
     ) {
         transaction {
             Speakers.insert {
@@ -69,7 +70,7 @@ class SpeakersImplementation : SpeakersRepository {
                 it [this.company] = company
                 it [this.rating] =  rating
                 it [this.date] =  date
-
+                it [this.email] = email
             }
         }
     }
@@ -106,7 +107,8 @@ class SpeakersImplementation : SpeakersRepository {
                              image: String,
                              company: String,
                              rating: Int,
-                             date: String
+                             date: String,
+                             email: String
     ) {
         transaction {
             Speakers.update {
@@ -128,7 +130,7 @@ class SpeakersImplementation : SpeakersRepository {
                 it [this.company] = company
                 it [this.rating] =  rating
                 it [this.date] =  date
-
+                it [this.email] =  email
             }
         }
     }

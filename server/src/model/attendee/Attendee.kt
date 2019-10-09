@@ -29,7 +29,8 @@ data class Attendee(
     val dateGrantTicket: String,
     val datePayedTicket: String,
     val timesExpiredTicket: Int,
-    val timesAbsent: Int): Serializable
+    val timesAbsent: Int,
+    val email: String): Serializable
 
 object Attendees: Table() {
     val id = integer("id").primaryKey().autoIncrement()
@@ -55,5 +56,5 @@ object Attendees: Table() {
     val datePayedTicket = varchar("date_payed_ticket", 32)
     val timesExpiredTicket = integer("times_expired_ticket")
     val timesAbsent = integer("times_absent")
-
+    val email = varchar("email", 64)
 }

@@ -9,6 +9,7 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import repository.publicAttendee.PublicAttendeesRepository
 
 @KtorExperimentalLocationsAPI
 @Location("$ATTENDEES/{id}")
@@ -16,7 +17,7 @@ import io.ktor.routing.Route
 data class AttendeeDetail(val id: Int)
 
 @KtorExperimentalLocationsAPI
-fun Route.attendeesDetail(db: AttendeesRepository) {
+fun Route.attendeesDetail(db: AttendeesRepository, dbPublic: PublicAttendeesRepository) {
     authenticate("jwt") {
         get<AttendeeDetail> { item ->
             when (db.attendees().find { it.id == item.id } ) {
@@ -31,6 +32,7 @@ fun Route.attendeesDetail(db: AttendeesRepository) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Attendee with id ${item.id} not found"))
                 else -> {
                     db.remove(item.id)
+                    dbPublic.remove(item.id)
                     call.respond(HttpStatusCode.OK, "Attendee $item.id deleted")
                 }
             }
@@ -62,9 +64,23 @@ fun Route.attendeesDetail(db: AttendeesRepository) {
                         request.dateGrantTicket,
                         request.datePayedTicket,
                         request.timesExpiredTicket,
-                        request.timesAbsent
+                        request.timesAbsent,
+                        request.email
                     )
                     call.respond(HttpStatusCode.Created)
+                    when (dbPublic.publicAttendees().find { it.id == item.id }) {
+                        null -> call.respond(HttpStatusCode.NotFound,
+                            Error("Public attendee with id ${item.id} could not be updated"))
+                        else -> {
+                            val attendee = dbPublic.publicAttendees().find { it.id == item.id }
+                            dbPublic.update(
+                                attendee!!.id,
+                                request.name,
+                                request.surname,
+                                request.company,
+                                request.email)
+                        }
+                    }
                 }
             }
         }
