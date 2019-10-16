@@ -8,9 +8,11 @@ import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Location
 import io.ktor.locations.post
 import io.ktor.request.receive
+import io.ktor.response.respond
 import io.ktor.response.respondText
 import io.ktor.routing.Route
 import io.ktor.util.KtorExperimentalAPI
+import model.Token
 import repository.organizer.OrganizersRepository
 
 const val LOGIN_ENDPOINT = "/login"
@@ -31,7 +33,8 @@ fun Route.login(db: OrganizersRepository, jwtService: JWTService) {
 
         if (user!=null) {
             val token = jwtService.generateToken(user)
-            call.respondText(token)
+            val key = Token(key = token)
+            call.respond(key)
         } else {
             call.respondText("Invalid user")
         }
