@@ -34,7 +34,7 @@ fun Route.login(db: OrganizersRepository, jwtService: JWTService) {
         if (user!=null) {
             val token = jwtService.generateToken(user)
             val key = Token(key = token)
-            call.respond(key)
+            call.respond(key.key)
         } else {
             call.respondText("Invalid user")
         }

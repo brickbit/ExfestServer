@@ -9,6 +9,7 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import model.Token
 
 const val RATINGS = "/ratings"
 @KtorExperimentalLocationsAPI
