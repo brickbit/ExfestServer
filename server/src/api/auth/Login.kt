@@ -4,6 +4,7 @@ import JWTService
 import hash
 import model.organizer.RequestOrganizer
 import io.ktor.application.call
+import io.ktor.http.HttpStatusCode
 import io.ktor.locations.KtorExperimentalLocationsAPI
 import io.ktor.locations.Location
 import io.ktor.locations.post
@@ -36,7 +37,7 @@ fun Route.login(db: OrganizersRepository, jwtService: JWTService) {
             val key = Token(key = token)
             call.respond(key.key)
         } else {
-            call.respondText("Invalid user")
+            call.respond(HttpStatusCode.Forbidden, "Invalid user or password")
         }
     }
 }
