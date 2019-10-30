@@ -10,6 +10,7 @@ class HotelsImplementation : HotelsRepository {
     private fun toHotel(row: ResultRow): Hotel =
         Hotel(
             id = row[Hotels.id],
+            name = row[Hotels.name],
             dateArrival = row[Hotels.dateArrival],
             dateExit = row[Hotels.dateExit],
             dateBooking = row[Hotels.dateBooking],
@@ -22,6 +23,7 @@ class HotelsImplementation : HotelsRepository {
         )
 
     override suspend fun add(
+        name: String,
         dayArrival: String,
         dayExit: String,
         dateBooking: String,
@@ -34,6 +36,7 @@ class HotelsImplementation : HotelsRepository {
     ) {
         transaction {
             Hotels.insert {
+                it [this.name] = name
                 it [this.dateArrival] = dayArrival
                 it [this.dateExit] = dayExit
                 it [this.dateBooking] = dateBooking
@@ -62,6 +65,7 @@ class HotelsImplementation : HotelsRepository {
     }
 
     override suspend fun update(
+        name: String,
         dayArrival: String,
         dayExit: String,
         dateBooking: String,
@@ -74,6 +78,7 @@ class HotelsImplementation : HotelsRepository {
     ) {
         transaction {
             Hotels.update {
+                it [this.name] = name
                 it [this.dateArrival] = dayArrival
                 it [this.dateExit] = dayExit
                 it [this.dateBooking] = dateBooking

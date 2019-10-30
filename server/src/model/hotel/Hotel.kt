@@ -6,6 +6,7 @@ import java.io.Serializable
 
 data class Hotel(
     val id: Int,
+    val name: String,
     val dateArrival: String,
     val dateExit: String,
     val dateBooking: String,
@@ -19,6 +20,7 @@ data class Hotel(
 
 object Hotels: Table() {
     val id = integer("id").primaryKey().autoIncrement()
+    val name = varchar("name",255)
     val dateArrival = varchar("day_arrival",255)
     val dateExit = varchar("day_exit",255)
     val dateBooking = varchar("day_booking",255)

@@ -3,7 +3,8 @@ package repository.hotel
 import model.hotel.Hotel
 
 interface HotelsRepository {
-    suspend fun add(dayArrival: String,
+    suspend fun add(name: String,
+                    dayArrival: String,
                     dayExit: String,
                     dateBooking: String,
                     cost: Float,
@@ -16,6 +17,7 @@ interface HotelsRepository {
     suspend fun hotel(id: String): Hotel?
     suspend fun hotels(): List<Hotel>
     suspend fun update(
+                    name: String,
                     dayArrival: String,
                     dayExit: String,
                     dateBooking: String,

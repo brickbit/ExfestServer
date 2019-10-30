@@ -41,6 +41,7 @@ fun Route.hotelsDetail(db: HotelsRepository) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Hotel with id ${item.id} not found"))
                 else -> {
                     db.update(
+                        request.name,
                         request.dateArrival,
                         request.dateExit,
                         request.dateBooking,

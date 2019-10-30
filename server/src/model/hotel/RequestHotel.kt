@@ -1,6 +1,7 @@
 package model.hotel
 
 data class RequestHotel(
+    val name: String,
                  val dateArrival: String,
                  val dateExit: String,
                  val dateBooking: String,

@@ -26,6 +26,7 @@ fun Route.hotels(db: HotelsRepository) {
         post<Hotel> {
             val request = call.receive<RequestHotel>()
             db.add(
+                request.name,
                 request.dateArrival,
                 request.dateExit,
                 request.dateBooking,
