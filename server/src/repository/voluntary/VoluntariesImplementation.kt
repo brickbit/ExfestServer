@@ -11,10 +11,10 @@ class VoluntariesImplementation : VoluntariesRepository {
         Voluntary(
             id = row[Voluntaries.id],
             name = row[Voluntaries.name],
+            foodRestriction = row[Voluntaries.foodRestriction],
             surname = row[Voluntaries.surname],
             genre = row[Voluntaries.genre],
             transport = row[Voluntaries.transport],
-            foodRestriction = row[Voluntaries.foodRestriction],
             merchandising = row[Voluntaries.merchandising],
             moreInfo = row[Voluntaries.moreInfo],
             children =  row[Voluntaries.children],
@@ -39,9 +39,9 @@ class VoluntariesImplementation : VoluntariesRepository {
     override suspend fun add(
         name: String,
         surname: String,
+        foodRestriction: String,
         genre: String,
         transport: String,
-        foodRestriction: Int,
         merchandising: Int,
         moreInfo: String,
         children: Boolean,
@@ -66,9 +66,9 @@ class VoluntariesImplementation : VoluntariesRepository {
             Voluntaries.insert {
                 it [this.name] = name
                 it [this.surname] = surname
+                it [this.foodRestriction] = foodRestriction
                 it [this.genre] = genre
                 it [this.transport] = transport
-                it [this.foodRestriction] = foodRestriction
                 it [this.merchandising] = merchandising
                 it [this.moreInfo] =  moreInfo
                 it [this.children] = children
@@ -109,9 +109,9 @@ class VoluntariesImplementation : VoluntariesRepository {
     override suspend fun update(
         name: String,
         surname: String,
+        foodRestriction: String,
         genre: String,
         transport: String,
-        foodRestriction: Int,
         merchandising: Int,
         moreInfo: String,
         children: Boolean,
@@ -136,9 +136,9 @@ class VoluntariesImplementation : VoluntariesRepository {
             Voluntaries.update {
                 it [this.name] = name
                 it [this.surname] = surname
+                it [this.foodRestriction] = foodRestriction
                 it [this.genre] = genre
                 it [this.transport] = transport
-                it [this.foodRestriction] = foodRestriction
                 it [this.merchandising] = merchandising
                 it [this.moreInfo] =  moreInfo
                 it [this.children] = children

@@ -45,9 +45,9 @@ fun Route.speakerDetail(db: SpeakersRepository, dbPublic: PublicSpeakersReposito
                     db.update(
                         request.name,
                         request.surname,
+                        request.foodRestriction,
                         request.genre,
                         request.transport,
-                        request.foodRestriction,
                         request.merchandising,
                         request.moreInfo,
                         request.children,
@@ -59,8 +59,7 @@ fun Route.speakerDetail(db: SpeakersRepository, dbPublic: PublicSpeakersReposito
                         request.numberVisit,
                         request.image,
                         request.company,
-                        request.rating,
-                        request.date,
+                        request.year,
                         request.email
                     )
                     when (dbPublic.publicSpeakers().find { it.id == item.id }) {

@@ -1,6 +1,5 @@
 package model.service
 
-import model.rating.Ratings
 import org.jetbrains.exposed.sql.Table
 import java.io.Serializable
 
@@ -10,8 +9,7 @@ data class Service(
     val cost: Float,
     val description: String,
     val granted: Boolean,
-    val company: String,
-    val rating: Int?
+    val company: String
 ): Serializable
 
 object Services: Table() {
@@ -21,5 +19,4 @@ object Services: Table() {
     val description = text("description")
     val granted = bool("granted")
     val company = varchar("company",128)
-    val rating = reference("rating", Ratings.id).nullable()
 }

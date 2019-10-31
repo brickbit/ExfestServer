@@ -7,8 +7,7 @@ interface ServicesRepository {
                     cost: Float,
                     description: String,
                     granted: Boolean,
-                    company: String,
-                    rating: Int)
+                    company: String)
     suspend fun service(id: Int): Service?
     suspend fun service(id: String): Service?
     suspend fun services(): List<Service>
@@ -17,8 +16,7 @@ interface ServicesRepository {
                     cost: Float,
                     description: String,
                     granted: Boolean,
-                    company: String,
-                    rating: Int)
+                    company: String)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

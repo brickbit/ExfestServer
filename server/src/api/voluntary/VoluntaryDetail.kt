@@ -45,9 +45,9 @@ fun Route.voluntariesDetail(db: VoluntariesRepository, dbPublic: PublicVoluntari
                     db.update(
                         request.name,
                         request.surname,
+                        request.foodRestriction,
                         request.genre,
                         request.transport,
-                        request.foodRestriction,
                         request.merchandising,
                         request.moreInfo,
                         request.children,

@@ -29,6 +29,7 @@ fun Route.organizers(db: OrganizersRepository, dbPublic: PublicOrganizersReposit
             db.add(
                 request.name,
                 request.surname,
+                request.foodRestriction,
                 request.email,
                 request.password,
                 request.moreInfo,

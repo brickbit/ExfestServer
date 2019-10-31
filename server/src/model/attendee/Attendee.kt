@@ -1,6 +1,5 @@
 package model.attendee
 
-import model.foodRestriction.FoodRestrictions
 import model.hotel.Hotels
 import model.merchandising.Merchandisings
 import org.jetbrains.exposed.sql.Table
@@ -10,9 +9,9 @@ data class Attendee(
     val id: Int,
     val name: String,
     val surname: String,
+    val foodRestriction: String,
     val genre: String,
     val transport: String,
-    val foodRestriction: Int?,
     val merchandising: Int?,
     val moreInfo: String,
     val children: Boolean,
@@ -36,9 +35,9 @@ object Attendees: Table() {
     val id = integer("id").primaryKey().autoIncrement()
     val name = varchar("name", 255)
     val surname = varchar("surname", 255)
+    val foodRestriction = varchar("foodRestriction", 255)
     val genre = varchar("genre", 255)
     val transport = varchar("transport", 128)
-    val foodRestriction = reference("foodRestriction", FoodRestrictions.id).nullable()
     val merchandising = reference("merchandising", Merchandisings.id).nullable()
     val moreInfo = text("more_info")
     val children = bool("children")

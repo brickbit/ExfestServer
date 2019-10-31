@@ -34,8 +34,7 @@ fun Route.hotels(db: HotelsRepository) {
                 request.distance,
                 request.transport,
                 request.hotelPayed,
-                request.userPayed,
-                request.rating)
+                request.userPayed)
             call.respond(HttpStatusCode.Created)
         }
         delete<Hotel> {

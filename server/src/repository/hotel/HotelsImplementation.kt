@@ -18,8 +18,7 @@ class HotelsImplementation : HotelsRepository {
             distance = row[Hotels.distance],
             transport = row[Hotels.transport],
             hotelPayed =  row[Hotels.hotelPayed],
-            userPayed =  row[Hotels.userPayed],
-            rating = row[Hotels.rating]
+            userPayed =  row[Hotels.userPayed]
         )
 
     override suspend fun add(
@@ -31,8 +30,7 @@ class HotelsImplementation : HotelsRepository {
         distance: Float,
         transport: String,
         hotelPayed: Boolean,
-        userPayed: Boolean,
-        rating: Int
+        userPayed: Boolean
     ) {
         transaction {
             Hotels.insert {
@@ -45,7 +43,6 @@ class HotelsImplementation : HotelsRepository {
                 it [this.transport] = transport
                 it [this.hotelPayed] =  hotelPayed
                 it [this.userPayed] = userPayed
-                it [this.rating] = rating
             }
         }
     }
@@ -73,8 +70,7 @@ class HotelsImplementation : HotelsRepository {
         distance: Float,
         transport: String,
         hotelPayed: Boolean,
-        userPayed: Boolean,
-        rating: Int
+        userPayed: Boolean
     ) {
         transaction {
             Hotels.update {
@@ -87,7 +83,6 @@ class HotelsImplementation : HotelsRepository {
                 it [this.transport] = transport
                 it [this.hotelPayed] =  hotelPayed
                 it [this.userPayed] = userPayed
-                it [this.rating] = rating
             }
         }
     }

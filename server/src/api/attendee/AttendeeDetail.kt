@@ -45,9 +45,9 @@ fun Route.attendeesDetail(db: AttendeesRepository, dbPublic: PublicAttendeesRepo
                     db.update(
                         request.name,
                         request.surname,
+                        request.foodRestriction,
                         request.genre,
                         request.transport,
-                        request.foodRestriction,
                         request.merchandising,
                         request.moreInfo,
                         request.children,

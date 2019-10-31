@@ -49,8 +49,7 @@ fun Route.hotelsDetail(db: HotelsRepository) {
                         request.distance,
                         request.transport,
                         request.hotelPayed,
-                        request.userPayed,
-                        request.rating
+                        request.userPayed
                     )
                     call.respond(HttpStatusCode.Created)
                 }

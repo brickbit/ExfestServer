@@ -5,9 +5,9 @@ import model.speaker.Speaker
 interface SpeakersRepository {
     suspend fun add(name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: Int,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,
@@ -19,7 +19,6 @@ interface SpeakersRepository {
                     numberVisit: Int,
                     image: String,
                     company: String,
-                    rating: Int,
                     date: String,
                     email: String)
     suspend fun speaker(id: Int): Speaker?
@@ -28,9 +27,9 @@ interface SpeakersRepository {
     suspend fun update(
                     name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: Int,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,
@@ -42,7 +41,6 @@ interface SpeakersRepository {
                     numberVisit: Int,
                     image: String,
                     company: String,
-                    rating: Int,
                     date: String,
                     email: String)
     suspend fun remove(id: Int): Boolean

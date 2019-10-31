@@ -46,7 +46,6 @@ fun Route.cateringsDetail(db: CateringsRepository) {
                         request.cost,
                         request.mandatory,
                         request.foodRestriction,
-                        request.rating,
                         request.dateService,
                         request.dateRequest
                     )

@@ -12,9 +12,9 @@ class SpeakersImplementation : SpeakersRepository {
             id = row[Speakers.id],
             name = row[Speakers.name],
             surname = row[Speakers.surname],
+            foodRestriction = row[Speakers.foodRestriction],
             genre = row[Speakers.genre],
             transport = row[Speakers.transport],
-            foodRestriction = row[Speakers.foodRestriction],
             merchandising = row[Speakers.merchandising],
             moreInfo = row[Speakers.moreInfo],
             children =  row[Speakers.children],
@@ -26,15 +26,14 @@ class SpeakersImplementation : SpeakersRepository {
             numberVisit =  row[Speakers.numberVisit],
             image =  row[Speakers.image],
             company =  row[Speakers.company],
-            rating =  row[Speakers.rating],
-            date =  row[Speakers.date],
+            year =  row[Speakers.year],
             email = row[Speakers.email]
         )
     override suspend fun add(name: String,
                              surname: String,
+                             foodRestriction: String,
                              genre: String,
                              transport: Int,
-                             foodRestriction: Int,
                              merchandising: Int,
                              moreInfo: String,
                              children: Boolean,
@@ -46,7 +45,6 @@ class SpeakersImplementation : SpeakersRepository {
                              numberVisit: Int,
                              image: String,
                              company: String,
-                             rating: Int,
                              date: String,
                              email: String
     ) {
@@ -54,9 +52,9 @@ class SpeakersImplementation : SpeakersRepository {
             Speakers.insert {
                 it [this.name] = name
                 it [this.surname] = surname
+                it [this.foodRestriction] = foodRestriction
                 it [this.genre] = genre
                 it [this.transport] = transport
-                it [this.foodRestriction] = foodRestriction
                 it [this.merchandising] = merchandising
                 it [this.moreInfo] =  moreInfo
                 it [this.children] = children
@@ -68,8 +66,7 @@ class SpeakersImplementation : SpeakersRepository {
                 it [this.numberVisit] = numberVisit
                 it [this.image] =  image
                 it [this.company] = company
-                it [this.rating] =  rating
-                it [this.date] =  date
+                it [this.year] =  date
                 it [this.email] = email
             }
         }
@@ -92,9 +89,9 @@ class SpeakersImplementation : SpeakersRepository {
     override suspend fun update(
                              name: String,
                              surname: String,
+                             foodRestriction: String,
                              genre: String,
                              transport: Int,
-                             foodRestriction: Int,
                              merchandising: Int,
                              moreInfo: String,
                              children: Boolean,
@@ -106,7 +103,6 @@ class SpeakersImplementation : SpeakersRepository {
                              numberVisit: Int,
                              image: String,
                              company: String,
-                             rating: Int,
                              date: String,
                              email: String
     ) {
@@ -114,9 +110,9 @@ class SpeakersImplementation : SpeakersRepository {
             Speakers.update {
                 it [this.name] = name
                 it [this.surname] = surname
+                it [this.foodRestriction] = foodRestriction
                 it [this.genre] = genre
                 it [this.transport] = transport
-                it [this.foodRestriction] = foodRestriction
                 it [this.merchandising] = merchandising
                 it [this.moreInfo] =  moreInfo
                 it [this.children] = children
@@ -128,8 +124,7 @@ class SpeakersImplementation : SpeakersRepository {
                 it [this.numberVisit] = numberVisit
                 it [this.image] =  image
                 it [this.company] = company
-                it [this.rating] =  rating
-                it [this.date] =  date
+                it [this.year] =  date
                 it [this.email] =  email
             }
         }

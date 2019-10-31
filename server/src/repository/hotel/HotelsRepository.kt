@@ -11,8 +11,7 @@ interface HotelsRepository {
                     distance: Float,
                     transport: String,
                     hotelPayed: Boolean,
-                    userPayed: Boolean,
-                    rating: Int)
+                    userPayed: Boolean)
     suspend fun hotel(id: Int): Hotel?
     suspend fun hotel(id: String): Hotel?
     suspend fun hotels(): List<Hotel>
@@ -25,8 +24,7 @@ interface HotelsRepository {
                     distance: Float,
                     transport: String,
                     hotelPayed: Boolean,
-                    userPayed: Boolean,
-                    rating: Int)
+                    userPayed: Boolean)
     suspend fun remove(id: Int): Boolean
     suspend fun remove(id: String): Boolean
     suspend fun clear()

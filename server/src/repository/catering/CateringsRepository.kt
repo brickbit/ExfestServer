@@ -6,7 +6,6 @@ interface CateringsRepository {
     suspend fun add(name: String,
                     cost: Float,
                     mandatory: Boolean,
-                    rating: Int,
                     numberDiner: Int,
                     dateService: String,
                     dateRequest: String)
@@ -17,7 +16,6 @@ interface CateringsRepository {
                     name: String,
                     cost: Float,
                     mandatory: Boolean,
-                    rating: Int,
                     numberDiner: Int,
                     dateService: String,
                     dateRequest: String)

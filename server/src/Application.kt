@@ -10,8 +10,6 @@ import api.bill.bills
 import api.bill.billsDetail
 import api.catering.caterings
 import api.catering.cateringsDetail
-import api.foodRestriction.foodRestrictions
-import api.foodRestriction.foodRestrictionsDetail
 import api.hotel.hotels
 import api.hotel.hotelsDetail
 import api.auth.login
@@ -25,8 +23,6 @@ import api.place.placeDetail
 import api.place.places
 import api.present.presents
 import api.present.presentsDetail
-import api.rating.ratings
-import api.rating.ratingsDetail
 import api.service.services
 import api.service.servicesDetail
 import api.auth.signIn
@@ -54,14 +50,12 @@ import repository.agenda.AgendasImplementation
 import repository.attendee.AttendeesImplementation
 import repository.bill.BillsImplementation
 import repository.catering.CateringsImplementation
-import repository.foodRestriction.FoodRestrictionsImplementation
 import repository.hotel.HotelsImplementation
 import repository.place.PlacesImplementation
 import repository.merchandising.MerchandisingsImplementation
 import repository.organizer.OrganizersImplementation
 import repository.partner.PartnersImplementation
 import repository.present.PresentsImplementation
-import repository.rating.RatingsImplementation
 import repository.service.ServicesImplementation
 import repository.speakers.SpeakersImplementation
 import repository.topic.TopicsImplementation
@@ -118,9 +112,7 @@ fun Application.module() {
     val dbAttendees = AttendeesImplementation()
     val dbVoluntaries = VoluntariesImplementation()
     val dbAgendas = AgendasImplementation()
-    val dbRatings = RatingsImplementation()
     val dbVideos = VideosImplementation()
-    val dbFoodRestrictions = FoodRestrictionsImplementation()
     val dbPartners = PartnersImplementation()
     val dbMerchandisings = MerchandisingsImplementation()
     val dbPresents = PresentsImplementation()
@@ -143,7 +135,6 @@ fun Application.module() {
             validate {
                 val payload = it.payload
                 val claim = payload.getClaim("email")
-                print(claim.asString())
                 val user = dbOrganizers.organizerByEmail(claim.asString())
                 user
             }
@@ -170,12 +161,8 @@ fun Application.module() {
         voluntariesDetail(dbVoluntaries, dbPublicVoluntaries)
         agendas(dbAgendas)
         agendasDetail(dbAgendas)
-        ratings(dbRatings)
-        ratingsDetail(dbRatings)
         videos(dbVideos)
         videosDetail(dbVideos)
-        foodRestrictions(dbFoodRestrictions)
-        foodRestrictionsDetail(dbFoodRestrictions)
         partners(dbPartners, dbPublicPartners)
         partnersDetail(dbPartners, dbPublicPartners)
         merchandisings(dbMerchandisings)

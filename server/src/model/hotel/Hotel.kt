@@ -1,6 +1,5 @@
 package model.hotel
 
-import model.rating.Ratings
 import org.jetbrains.exposed.sql.Table
 import java.io.Serializable
 
@@ -14,8 +13,7 @@ data class Hotel(
     val distance: Float,
     val transport: String,
     val hotelPayed: Boolean,
-    val userPayed: Boolean,
-    val rating: Int?
+    val userPayed: Boolean
 ): Serializable
 
 object Hotels: Table() {
@@ -29,5 +27,4 @@ object Hotels: Table() {
     val transport = varchar("transport",255)
     val hotelPayed = bool("hotel_payed")
     val userPayed = bool("user_payed")
-    val rating = reference("rating", Ratings.id).nullable()
 }

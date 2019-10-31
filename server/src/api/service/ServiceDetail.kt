@@ -45,8 +45,7 @@ fun Route.servicesDetail(db: ServicesRepository) {
                         request.cost,
                         request.description,
                         request.granted,
-                        request.company,
-                        request.rating
+                        request.company
                     )
                     call.respond(HttpStatusCode.Created)
                 }

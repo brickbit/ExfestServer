@@ -5,9 +5,9 @@ import model.voluntary.Voluntary
 interface VoluntariesRepository {
     suspend fun add(name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: String,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,
@@ -33,9 +33,9 @@ interface VoluntariesRepository {
     suspend fun update(
                     name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: String,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,

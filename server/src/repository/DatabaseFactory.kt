@@ -5,14 +5,12 @@ import model.attendee.Attendees
 import model.bill.Bills
 import model.catering.Caterings
 import model.conference.Conferences
-import model.foodRestriction.FoodRestrictions
 import model.hotel.Hotels
 import model.place.Places
 import model.merchandising.Merchandisings
 import model.organizer.Organizers
 import model.partner.Partners
 import model.present.Presents
-import model.rating.Ratings
 import model.service.Services
 import model.speaker.Speakers
 import model.topic.Topics
@@ -54,9 +52,7 @@ object DatabaseFactory {
             SchemaUtils.create(Attendees)
             SchemaUtils.create(Voluntaries)
             SchemaUtils.create(Agendas)
-            SchemaUtils.create(Ratings)
             SchemaUtils.create(Videos)
-            SchemaUtils.create(FoodRestrictions)
             SchemaUtils.create(Partners)
             SchemaUtils.create(Merchandisings)
             SchemaUtils.create(Presents)

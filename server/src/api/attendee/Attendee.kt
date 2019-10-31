@@ -29,9 +29,9 @@ fun Route.attendees(db: AttendeesRepository, dbPublic: PublicAttendeesRepository
             db.add(
                 request.name,
                 request.surname,
+                request.foodRestriction,
                 request.genre,
                 request.transport,
-                request.foodRestriction,
                 request.merchandising,
                 request.moreInfo,
                 request.children,

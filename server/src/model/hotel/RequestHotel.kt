@@ -12,5 +12,4 @@ data class RequestHotel(
                  val voluntary: Int,
                  val hotelPayed: Boolean,
                  val userPayed: Boolean,
-                 val rating: Int,
                  val foodRestriction: Int)

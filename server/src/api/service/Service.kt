@@ -30,8 +30,7 @@ fun Route.services(db: ServicesRepository) {
                 request.cost,
                 request.description,
                 request.granted,
-                request.company,
-                request.rating)
+                request.company)
             call.respond(HttpStatusCode.Created)
         }
         delete<Service> {

@@ -29,9 +29,9 @@ fun Route.speakers(db: SpeakersRepository, dbPublic: PublicSpeakersRepository) {
             db.add(
                 request.name,
                 request.surname,
+                request.foodRestriction,
                 request.genre,
                 request.transport,
-                request.foodRestriction,
                 request.merchandising,
                 request.moreInfo,
                 request.children,
@@ -43,8 +43,7 @@ fun Route.speakers(db: SpeakersRepository, dbPublic: PublicSpeakersRepository) {
                 request.numberVisit,
                 request.image,
                 request.company,
-                request.rating,
-                request.date,
+                request.year,
                 request.email)
             when (db.speakers().find { it.email == request.email }) {
                 null -> call.respond(HttpStatusCode.NotFound,

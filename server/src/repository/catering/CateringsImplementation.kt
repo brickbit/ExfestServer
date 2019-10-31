@@ -13,7 +13,6 @@ class CateringsImplementation : CateringsRepository {
             name = row[Caterings.name],
             cost = row[Caterings.cost],
             mandatory = row[Caterings.mandatory],
-            rating = row[Caterings.rating],
             numberDiner = row[Caterings.numberDiner],
             dateService =  row[Caterings.dateService],
             dateRequest =  row[Caterings.dateRequest]
@@ -22,7 +21,6 @@ class CateringsImplementation : CateringsRepository {
         name: String,
         cost: Float,
         mandatory: Boolean,
-        rating: Int,
         numberDiner: Int,
         dateService: String,
         dateRequest: String
@@ -32,7 +30,6 @@ class CateringsImplementation : CateringsRepository {
                 it [this.name] = name
                 it [this.cost] = cost
                 it [this.mandatory] = mandatory
-                it [this.rating] = rating
                 it [this.numberDiner] =  numberDiner
                 it [this.dateService] = dateService
                 it [this.dateRequest] =  dateRequest
@@ -58,7 +55,6 @@ class CateringsImplementation : CateringsRepository {
         name: String,
         cost: Float,
         mandatory: Boolean,
-        rating: Int,
         numberDiner: Int,
         dateService: String,
         dateRequest: String
@@ -68,7 +64,6 @@ class CateringsImplementation : CateringsRepository {
                 it [this.name] = name
                 it [this.cost] = cost
                 it [this.mandatory] = mandatory
-                it [this.rating] = rating
                 it [this.numberDiner] =  numberDiner
                 it [this.dateService] = dateService
                 it [this.dateRequest] =  dateRequest

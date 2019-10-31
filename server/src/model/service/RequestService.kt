@@ -5,5 +5,4 @@ data class RequestService(
                    val cost: Float,
                    val description: String,
                    val granted: Boolean,
-                   val company: String,
-                   val rating: Int)
+                   val company: String)

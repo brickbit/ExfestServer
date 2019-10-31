@@ -3,9 +3,9 @@ package model.attendee
 data class RequestAttendee(
     val name: String,
     val surname: String,
+    val foodRestriction: String,
     val genre: String,
     val transport: String,
-    val foodRestriction: Int,
     val merchandising: Int,
     val moreInfo: String,
     val children: Boolean,

@@ -14,11 +14,10 @@ class ServicesImplementation : ServicesRepository {
             cost = row[Services.cost],
             description = row[Services.description],
             granted = row[Services.granted],
-            company = row[Services.company],
-            rating = row[Services.rating]
+            company = row[Services.company]
         )
 
-    override suspend fun add(name: String, cost: Float, description: String, granted: Boolean, company: String, rating: Int) {
+    override suspend fun add(name: String, cost: Float, description: String, granted: Boolean, company: String) {
         transaction {
             Services.insert {
                 it [this.name] = name
@@ -26,7 +25,6 @@ class ServicesImplementation : ServicesRepository {
                 it [this.description] = description
                 it [this.granted] = granted
                 it [this.company] = company
-                it [this.rating] = rating
             }
         }
     }
@@ -45,7 +43,7 @@ class ServicesImplementation : ServicesRepository {
         Services.selectAll().map { toService(it) }
     }
 
-    override suspend fun update(name: String, cost: Float, description: String, granted: Boolean, company: String, rating: Int) {
+    override suspend fun update(name: String, cost: Float, description: String, granted: Boolean, company: String) {
         transaction {
             Services.update {
                 it [this.name] = name
@@ -53,7 +51,6 @@ class ServicesImplementation : ServicesRepository {
                 it [this.description] = description
                 it [this.granted] = granted
                 it [this.company] = company
-                it [this.rating] = rating
             }
         }
     }

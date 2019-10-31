@@ -5,9 +5,9 @@ import model.attendee.Attendee
 interface AttendeesRepository {
     suspend fun add(name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: String,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,
@@ -32,9 +32,9 @@ interface AttendeesRepository {
     suspend fun update(
                     name: String,
                     surname: String,
+                    foodRestriction: String,
                     genre: String,
                     transport: String,
-                    foodRestriction: Int,
                     merchandising: Int,
                     moreInfo: String,
                     children: Boolean,

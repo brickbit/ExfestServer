@@ -6,7 +6,6 @@ data class RequestCatering(
     val mandatory: Boolean,
     val foodRestriction: Int,
     val numberFoodRestriction: Int,
-    val rating: Int,
     val numberDiner: Int,
     val dateService: String,
     val dateRequest: String)
