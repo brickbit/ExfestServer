@@ -8,6 +8,7 @@ import io.ktor.locations.*
 import io.ktor.request.receive
 import io.ktor.response.respond
 import io.ktor.routing.Route
+import model.Error
 import repository.publicVoluntary.PublicVoluntariesRepository
 import repository.voluntary.VoluntariesRepository
 
@@ -55,16 +56,21 @@ fun Route.voluntaries(db: VoluntariesRepository, dbPublic: PublicVoluntariesRepo
                 null -> call.respond(HttpStatusCode.NotFound,
                     Error("Public attendee could not be created"))
                 else -> {
-                    val attendee = db.voluntaries().find { it.email == request.email }
-                    dbPublic.add(
-                        attendee!!.id,
-                        request.name,
-                        request.surname,
-                        request.image,
-                        request.company,
-                        request.gdg,
-                        request.email)
-                    call.respond(HttpStatusCode.Created)
+                    if (db.voluntaries().count { it.email == request.email } > 1) {
+                        call.respond(Error("Email exist, email can be repeated"))
+                    } else {
+                        val attendee = db.voluntaries().find { it.email == request.email }
+                        dbPublic.add(
+                            attendee!!.id,
+                            request.name,
+                            request.surname,
+                            request.image,
+                            request.company,
+                            request.gdg,
+                            request.email
+                        )
+                        call.respond(HttpStatusCode.Created)
+                    }
                 }
             }
         }

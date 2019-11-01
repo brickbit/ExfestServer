@@ -1,3 +1,3 @@
 package model
 
-data class Error(val message: String)
+data class Error(val error: String)
