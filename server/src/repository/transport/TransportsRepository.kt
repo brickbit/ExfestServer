@@ -3,7 +3,8 @@ package repository.transport
 import model.transport.Transport
 
 interface TransportsRepository {
-    suspend fun add(kind: String,
+    suspend fun add(name: String,
+                    number: Int,
                     cost: Float,
                     shared: Boolean,
                     dateRequest: String,
@@ -13,7 +14,8 @@ interface TransportsRepository {
     suspend fun transport(id: String): Transport?
     suspend fun transports(): List<Transport>
     suspend fun update(
-        kind: String,
+        name: String,
+        number: Int,
         cost: Float,
         shared: Boolean,
         dateRequest: String,

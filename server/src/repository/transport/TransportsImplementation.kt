@@ -10,7 +10,8 @@ class TransportsImplementation : TransportsRepository {
     private fun toTransport(row: ResultRow): Transport =
         Transport(
             id = row[Transports.id],
-            kind =  row[Transports.kind],
+            name = row[Transports.name],
+            number =  row[Transports.number],
             cost = row[Transports.cost],
             shared = row[Transports.shared],
             dateRequest = row[Transports.dateRequest],
@@ -18,7 +19,8 @@ class TransportsImplementation : TransportsRepository {
             dateArrive = row[Transports.dateArrive]
         )
     override suspend fun add(
-        kind: String,
+        name: String,
+        number: Int,
         cost: Float,
         shared: Boolean,
         dateRequest: String,
@@ -27,7 +29,8 @@ class TransportsImplementation : TransportsRepository {
     ) {
         transaction {
             Transports.insert {
-                it [this.kind] = kind
+                it [this.name] = name
+                it [this.number] = number
                 it [this.cost] = cost
                 it [this.shared] = shared
                 it [this.dateRequest] = dateRequest
@@ -52,7 +55,8 @@ class TransportsImplementation : TransportsRepository {
     }
 
     override suspend fun update(
-        kind: String,
+        name: String,
+        number: Int,
         cost: Float,
         shared: Boolean,
         dateRequest: String,
@@ -61,7 +65,8 @@ class TransportsImplementation : TransportsRepository {
     ) {
         transaction {
             Transports.update {
-                it [this.kind] = kind
+                it [this.name] = name
+                it [this.number] = number
                 it [this.cost] = cost
                 it [this.shared] = shared
                 it [this.dateRequest] = dateRequest

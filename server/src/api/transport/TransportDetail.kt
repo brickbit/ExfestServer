@@ -41,7 +41,8 @@ fun Route.transportsDetail(db: TransportsRepository) {
                 null -> call.respond(HttpStatusCode.NotFound, Error("Transport with id ${item.id} not found"))
                 else -> {
                     db.update(
-                        request.kind,
+                        request.name,
+                        request.number,
                         request.cost,
                         request.shared,
                         request.dateRequest,

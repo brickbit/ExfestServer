@@ -26,7 +26,8 @@ fun Route.transports(db: TransportsRepository) {
         post<Transport> {
             val request = call.receive<RequestTransport>()
             db.add(
-                request.kind,
+                request.name,
+                request.number,
                 request.cost,
                 request.shared,
                 request.dateRequest,
