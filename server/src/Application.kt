@@ -26,6 +26,8 @@ import api.present.presentsDetail
 import api.service.services
 import api.service.servicesDetail
 import api.auth.signIn
+import api.foodRestriction.foodRestrictions
+import api.foodRestriction.foodRestrictionsDetail
 import api.publicAttendee.publicAttendeeDetail
 import api.publicAttendee.publicAttendees
 import api.publicOrganizer.publicOrganizerDetail
@@ -76,6 +78,7 @@ import io.ktor.locations.Locations
 import io.ktor.response.*
 import io.ktor.routing.routing
 import io.ktor.util.KtorExperimentalAPI
+import repository.foodRestriction.FoodRestrictionImplementation
 import repository.publicAttendee.PublicAttendeesImplementation
 import repository.publicOrganizer.PublicOrganizersImplementation
 import repository.publicPartner.PublicPartnersImplementation
@@ -126,6 +129,7 @@ fun Application.module() {
     val dbPublicPartners = PublicPartnersImplementation()
     val dbPublicSpeakers = PublicSpeakersImplementation()
     val dbPublicVoluntaries = PublicVoluntariesImplementation()
+    val dbFoodRestriction = FoodRestrictionImplementation()
 
     val jwtService = JWTService()
     install(Authentication) {
@@ -179,6 +183,8 @@ fun Application.module() {
         billsDetail(dbBills)
         topics(dbTopics)
         topicsDetail(dbTopics)
+        foodRestrictions(dbFoodRestriction)
+        foodRestrictionsDetail(dbFoodRestriction)
 
         signIn(dbOrganizers)
         login(dbOrganizers,jwtService)

@@ -21,6 +21,7 @@ import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import model.foodRestriction.FoodRestrictions
 import model.publicAttendee.PublicAttendees
 import model.publicOrganizer.PublicOrganizers
 import model.publicPartner.PublicPartners
@@ -29,6 +30,7 @@ import model.publicVoluntary.PublicVoluntaries
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import javax.xml.validation.Schema
 
 object DatabaseFactory {
     private fun hikari(): HikariDataSource {
@@ -61,6 +63,7 @@ object DatabaseFactory {
             SchemaUtils.create(Organizers)
             SchemaUtils.create(Bills)
             SchemaUtils.create(Topics)
+            SchemaUtils.create(FoodRestrictions)
 
             SchemaUtils.create(PublicAttendees)
             SchemaUtils.create(PublicOrganizers)
