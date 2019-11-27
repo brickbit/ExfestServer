@@ -36,7 +36,6 @@ fun Route.signIn(db: OrganizersRepository) {
         db.add(
             request.name,
             request.surname,
-            request.foodRestriction,
             request.email,
             hash(request.password),
             request.moreInfo,

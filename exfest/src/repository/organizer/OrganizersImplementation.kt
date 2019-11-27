@@ -12,7 +12,6 @@ class OrganizersImplementation : OrganizersRepository {
             id = row[Organizers.id],
             name = row[Organizers.name],
             surname = row[Organizers.surname],
-            foodRestriction = row[Organizers.foodRestriction],
             email = row[Organizers.email],
             password = row[Organizers.password],
             moreInfo = row[Organizers.moreInfo],
@@ -22,7 +21,6 @@ class OrganizersImplementation : OrganizersRepository {
         )
     override suspend fun add(name: String,
                              surname: String,
-                             foodRestriction: String,
                              email: String,
                              password: String,
                              moreInfo: String,
@@ -34,7 +32,6 @@ class OrganizersImplementation : OrganizersRepository {
             Organizers.insert {
                 it [this.name] = name
                 it [this.surname] = surname
-                it [this.foodRestriction] = foodRestriction
                 it [this.email] = email
                 it [this.password] = password
                 it [this.moreInfo] = moreInfo
@@ -91,7 +88,6 @@ class OrganizersImplementation : OrganizersRepository {
 
     override suspend fun update(name: String,
                                 surname: String,
-                                foodRestriction: String,
                                 email: String,
                                 password: String,
                                 moreInfo: String,
@@ -103,7 +99,6 @@ class OrganizersImplementation : OrganizersRepository {
             Organizers.insert {
                 it [this.name] = name
                 it [this.surname] = surname
-                it [this.foodRestriction] = foodRestriction
                 it [this.email] = email
                 it [this.password] = password
                 it [this.moreInfo] = moreInfo

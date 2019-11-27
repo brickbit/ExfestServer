@@ -43,7 +43,6 @@ fun Route.organizersDetail(db: OrganizersRepository) {
                     db.update(
                         request.name,
                         request.surname,
-                        request.foodRestriction,
                         request.email,
                         request.password,
                         request.moreInfo,

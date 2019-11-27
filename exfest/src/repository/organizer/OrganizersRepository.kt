@@ -5,7 +5,6 @@ import model.organizer.Organizer
 interface OrganizersRepository {
     suspend fun add(name: String,
                     surname: String,
-                    foodRestriction: String,
                     email: String,
                     password: String,
                     moreInfo: String,
@@ -21,7 +20,6 @@ interface OrganizersRepository {
     suspend fun organizers(): List<Organizer>
     suspend fun update(name: String,
                        surname: String,
-                       foodRestriction: String,
                        email: String,
                        password: String,
                        moreInfo: String,

@@ -7,7 +7,6 @@ import java.io.Serializable
 data class Organizer(
     val id: Int,
     val name: String,
-    val foodRestriction: String,
     val surname: String,
     val email: String,
     val password: String,
@@ -20,7 +19,6 @@ object Organizers: Table() {
     val id = integer("id").primaryKey().autoIncrement()
     val name = varchar("name", 255)
     val surname = varchar("surname", 255)
-    val foodRestriction = varchar("food_restriction", 255)
     val moreInfo = text("more_info")
     val image = text("image")
     val company = varchar("company",255)
